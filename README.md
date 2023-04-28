@@ -1,5 +1,7 @@
 This is my Mini Project for the course- Data Visualisation.
 
+The link to the GitHub repo is https://github.com/amanthakur64/datavizproject.
+
 It is Deployed at: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://amanthakur64-datavizproject-streamlit-app-dvjvpk.streamlit.app/)
 
 ## Requirements
@@ -25,3 +27,5 @@ Using the options menu on the left, navigate to the IIT Jodhpur Tab to load the 
 Click on the '>' icon on the top left to open the menu, click on the geojson layer.
 
 Enable the height option and select the field as population.
+
+
