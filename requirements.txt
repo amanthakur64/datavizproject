@@ -1,11 +1,6 @@
---find-links=https://girder.github.io/large_image_wheels GDAL
-geemap
-geopandas
-jupyter-server-proxy
-keplergl
-leafmap
-localtileserver
-nbserverproxy
-streamlit
-streamlit-option-menu
-
+geopandas==0.12.2
+keplergl==0.3.2
+leafmap==0.20.0
+streamlit==1.8.1
+streamlit_keplergl==0.3.0
+streamlit_option_menu==0.3.2

@@ -10,7 +10,7 @@ st.set_page_config(page_title="Streamlit Geospatial", layout="wide")
 apps = [
     {"func": home.app, "title": "Home", "icon": "house"},
     {"func": heatmap.app, "title": "Heatmap", "icon": "map"},
-    {"func": upload.app, "title": "Upload", "icon": "cloud-upload"},
+    {"func": upload.app, "title": "IIT Jodhpur", "icon": "building"},
 ]
 
 titles = [app["title"] for app in apps]
@@ -36,12 +36,10 @@ with st.sidebar:
     st.sidebar.title("About")
     st.sidebar.info(
         """
-        This web [app](https://share.streamlit.io/giswqs/streamlit-template) is maintained by [Qiusheng Wu](https://wetlands.io). You can follow me on social media:
-            [GitHub](https://github.com/giswqs) | [Twitter](https://twitter.com/giswqs) | [YouTube](https://www.youtube.com/c/QiushengWu) | [LinkedIn](https://www.linkedin.com/in/qiushengwu).
-        
-        Source code: <https://github.com/giswqs/streamlit-template>
+        This web app is made using [Streamlit](https://streamlit.io/), [Leafmap](https://leafmap.org/), and [Kepler.gl](https://kepler.gl/) 
+        for the Data Visualization Project.
 
-        More menu icons: <https://icons.getbootstrap.com>
+        The template for this app is taken from https://github.com/giswqs/streamlit-template
     """
     )
 

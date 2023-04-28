@@ -1,97 +1,33 @@
-import os
-import geopandas as gpd
 import streamlit as st
-
-
-def save_uploaded_file(file_content, file_name):
-    """
-    Save the uploaded file to a temporary directory
-    """
-    import tempfile
-    import os
-    import uuid
-
-    _, file_extension = os.path.splitext(file_name)
-    file_id = str(uuid.uuid4())
-    file_path = os.path.join(tempfile.gettempdir(), f"{file_id}{file_extension}")
-
-    with open(file_path, "wb") as file:
-        file.write(file_content.getbuffer())
-
-    return file_path
+import leafmap.foliumap as leafmap
+from keplergl import KeplerGl
+import geopandas as gpd
+from streamlit_keplergl import keplergl_static
 
 
 def app():
+    
+    st.title("IIT Jodhpur's Hostels")
 
-    st.title("Upload Vector Data")
+    # m = leafmap.Map()
+    # in_csv = 'map (3).geojson'
+    # config = 'kepler.gl.json'
+    # m.add_geojson(in_csv, layer_name="hex_data")
+    # m.to_streamlit(height=700)
+    
+    with open('map (3).geojson', 'r') as f:
+        geojson = f.read()
 
-    row1_col1, row1_col2 = st.columns([2, 1])
-    width = 950
-    height = 600
+    conf={"version":"v1","config":{"visState":{"filters":[],"layers":[{"id":"qwoaf2t","type":"geojson","config":{"dataId":"f10dsgkr8","label":"map (3)","color":[119,110,87],"highlightColor":[252,242,26,255],"columns":{"geojson":"_geojson"},"isVisible":True,"visConfig":{"opacity":0.8,"strokeOpacity":0.8,"thickness":0.5,"strokeColor":[114,12,157],"colorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#184a5a","#C70039"]},"strokeColorRange":{"name":"Global Warming","type":"sequential","category":"Uber","colors":["#5A1846","#900C3F","#C70039","#E3611C","#F1920E","#FFC300"]},"radius":10,"sizeRange":[0,10],"radiusRange":[0,50],"heightRange":[0,500],"elevationScale":0.5,"enableElevationZoomFactor":True,"stroked":True,"filled":True,"enable3d":True,"wireframe":True},"hidden":False,"textLabel":[{"field":None,"color":[255,255,255],"size":18,"offset":[0,0],"anchor":"start","alignment":"center"}]},"visualChannels":{"colorField":{"name":"type","type":"string"},"colorScale":"ordinal","strokeColorField":None,"strokeColorScale":"quantile","sizeField":None,"sizeScale":"linear","heightField":{"name":"population","type":"integer"},"heightScale":"log","radiusField":None,"radiusScale":"linear"}}],"interactionConfig":{"tooltip":{"fieldsToShow":{"f10dsgkr8":[{"name":"name","format":None},{"name":"population","format":None},{"name":"type","format":None}]},"compareMode":False,"compareType":"absolute","enabled":True},"brush":{"size":0.5,"enabled":False},"geocoder":{"enabled":False},"coordinate":{"enabled":False}},"layerBlending":"normal","splitMaps":[],"animationConfig":{"currentTime":None,"speed":1}},"mapState":{"bearing":-31.714895207288237,"dragRotate":True,"latitude":26.47439658457512,"longitude":73.1150498086556,"pitch":41.778548162555424,"zoom":15.581155874629815,"isSplit":False},"mapStyle":{"styleType":"dark","topLayerGroups":{},"visibleLayerGroups":{"label":True,"road":True,"border":False,"building":True,"water":True,"land":True,"3d building":False},"threeDBuildingColor":[9.665468314072013,17.18305478057247,31.1442867897876],"mapStyles":{}}}}
+    
 
-    with row1_col2:
+    # map_1.add_data(data=geojson, name='geojson')
 
-        backend = st.selectbox(
-            "Select a plotting backend", ["folium", "kepler.gl", "pydeck"], index=2
-        )
-
-        if backend == "folium":
-            import leafmap.foliumap as leafmap
-        elif backend == "kepler.gl":
-            import leafmap.kepler as leafmap
-        elif backend == "pydeck":
-            import leafmap.deck as leafmap
-
-        url = st.text_input(
-            "Enter a URL to a vector dataset",
-            "https://github.com/giswqs/streamlit-geospatial/raw/master/data/us_states.geojson",
-        )
-
-        data = st.file_uploader(
-            "Upload a vector dataset", type=["geojson", "kml", "zip", "tab"]
-        )
-
-        container = st.container()
-
-        if data or url:
-            if data:
-                file_path = save_uploaded_file(data, data.name)
-                layer_name = os.path.splitext(data.name)[0]
-            elif url:
-                file_path = url
-                layer_name = url.split("/")[-1].split(".")[0]
-
-            with row1_col1:
-                if file_path.lower().endswith(".kml"):
-                    gpd.io.file.fiona.drvsupport.supported_drivers["KML"] = "rw"
-                    gdf = gpd.read_file(file_path, driver="KML")
-                else:
-                    gdf = gpd.read_file(file_path)
-                lon, lat = leafmap.gdf_centroid(gdf)
-                if backend == "pydeck":
-
-                    column_names = gdf.columns.values.tolist()
-                    random_column = None
-                    with container:
-                        random_color = st.checkbox("Apply random colors", True)
-                        if random_color:
-                            random_column = st.selectbox(
-                                "Select a column to apply random colors", column_names
-                            )
-
-                    m = leafmap.Map(center=(40, -100))
-                    # m = leafmap.Map(center=(lat, lon))
-                    m.add_gdf(gdf, random_color_column=random_column)
-                    st.pydeck_chart(m)
-
-                else:
-                    m = leafmap.Map(center=(lat, lon), draw_export=True)
-                    m.add_gdf(gdf, layer_name=layer_name)
-                    if backend == "folium":
-                        m.zoom_to_gdf(gdf)
-                    m.to_streamlit(width=width, height=height)
-
-        else:
-            with row1_col1:
-                m = leafmap.Map()
-                st.pydeck_chart(m)
+    # data=gpd.read_file('map (3).geojson')
+   
+    # map=KeplerGl(height=700, data={"data":data}, config=config) 
+    # map.to_streamlit()
+    map_1 = KeplerGl()
+    map_1.add_data(data=geojson, name='geojson')
+    map_1.config=conf
+    keplergl_static(map_1,center_map=True)
