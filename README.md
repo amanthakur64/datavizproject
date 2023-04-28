@@ -1,6 +1,6 @@
 This is my Mini Project for the course- Data Visualisation.
 
-It is Deployed at: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/amanthakur64/heartdiseaseprediction)
+It is Deployed at: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://amanthakur64-datavizproject-streamlit-app-dvjvpk.streamlit.app/)
 
 ## Requirements
 
