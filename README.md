@@ -22,4 +22,6 @@ To run the code, simply run the command ```streamlit run streamlit_app.py``` in 
 
 Using the options menu on the left, navigate to the IIT Jodhpur Tab to load the kepler map.
 
-Enable the height option and select the field as population
+Click on the '>' icon on the top left to open the menu, click on the geojson layer.
+
+Enable the height option and select the field as population.
